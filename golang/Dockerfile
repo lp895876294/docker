@@ -11,7 +11,7 @@ MAINTAINER lp
 RUN wget https://storage.googleapis.com/golang/go1.6.2.linux-amd64.tar.gz && \
 	tar -xvf go1.6.2.linux-amd64.tar.gz -C /usr/local && \
 	rm -rf go1.6.2.linux-amd64.tar.gz && \
-	mkdir /go
+	mkdir -p /go
 
 ENV GOROOT /usr/local/go
 ENV GOPATH /go
