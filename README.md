@@ -6,4 +6,7 @@
 * jdk8 : jdk1.8-x64安装和配置
 * tomcat7 : 安装tomcat，优化了tomcat访问日志。具体参考tomcat7/README.md
 * zookeeper : 安装zookeeper3.4.8，支持单点和集群的zookeeper配置，具体参考zookeeper/README.md
+* golang : 基于go1.6构建
 * mysql : 暂未使用
+* codis : 暂未使用
+* codis-server : 暂未使用
