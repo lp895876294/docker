@@ -16,8 +16,9 @@ RUN go get -u -d github.com/CodisLabs/codis ; cd $GOPATH/src/github.com/CodisLab
 ENV CODIS_HOME $GOPATH/src/github.com/CodisLabs/codis
 ENV PATH $PATH:$CODIS_HOME/bin 
 
-#add codis conf
-ADD redis.conf /codis/conf
-ADD config.ini /codis/conf
+#supervisor
+#ADD supervisor_codis.conf /etc/supervisor.conf.d/
 
-VOLUME /codis/conf
+#add codis conf
+ADD conf/redis.conf /codis/conf/redis.conf
+ADD conf/config.ini /codis/conf/config.ini
