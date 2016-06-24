@@ -5,8 +5,10 @@
 * centos7 : 添加了常用的工具，主要包括gcc、python和supervisor，同时初始化了supervisor的配置
 * jdk8 : jdk1.8-x64安装和配置
 * tomcat7 : 安装tomcat，优化了tomcat访问日志。具体参考tomcat7/README.md
-* zookeeper : 安装zookeeper3.4.8，支持单点和集群的zookeeper配置，具体参考zookeeper/README.md
-* golang : 基于go1.6构建
+* zookeeper : 安装zookeeper3.4.8，支持单点和集群的zookeeper配置，具体参考[zookeeper配置](https://github.com/lp895876294/docker/tree/master/zookeeper)。
+* golang : 基于go1.6构建。
+* codis : 包含codis-config、codis-proxy等功能，需要根据实际环境启动和配置，最好以--net=host模式运行容器。
+* codis-server : 类似于redis的服务端，比原有的redis增加了slot功能，默认暴露的端口为6379。
+* erlang : 基于erlang_R15B01构建，[下载地址](https://www.erlang.org/downloads)。
+* rabbitmq : 基于3.5.1构建，[下载地址](http://www.rabbitmq.com/releases/rabbitmq-server/) , [rabbitmq概览](http://www.rabbitmq.com/getstarted.html)，[rabbitmq文档](http://www.rabbitmq.com/documentation.html) 。
 * mysql : 暂未使用
-* codis : 暂未使用
-* codis-server : 暂未使用
