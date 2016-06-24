@@ -10,15 +10,14 @@ MAINTAINER lp
 
 RUN go get -u -d github.com/CodisLabs/codis ; cd $GOPATH/src/github.com/CodisLabs/codis && \
 	make && \
-	mkdir -p conf && ln -s $GOPATH/src/github.com/CodisLabs/codis /codis 
-
-#codis相关环境变量
-ENV CODIS_HOME $GOPATH/src/github.com/CodisLabs/codis
-ENV PATH $PATH:$CODIS_HOME/bin 
-
-#supervisor
-#ADD supervisor_codis.conf /etc/supervisor.conf.d/
+	mkdir -p conf && ln -s $GOPATH/src/github.com/CodisLabs/codis /codis && \
+	rm -rf /codis/config.ini 
 
 #add codis conf
 ADD conf/redis.conf /codis/conf/redis.conf
 ADD conf/config.ini /codis/conf/config.ini
+
+#codis comman
+ADD startDashboard.sh /codis/bin/
+ADD startSlotinit.sh /codis/bin/
+ADD startProxy.sh /codis/bin/

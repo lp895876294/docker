@@ -4,7 +4,7 @@
 #
 # Dockerizing CentOS7: Dockerfile for building CentOS images
 #
-FROM       registry.aliyuncs.com/glodonedu/codis-config:3.0
+FROM       registry.aliyuncs.com/glodonedu/codis:3.0
 MAINTAINER lp
 
 #codis-server启动
