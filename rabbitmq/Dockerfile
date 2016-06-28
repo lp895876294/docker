@@ -21,10 +21,12 @@ RUN sed -i 's/{loopback_users,\[\(<<"guest">>]\)}/{loopback_users,[]}/g' /opt/mq
 
 #add supervisor
 ADD supervisor_rabbitmq.conf /etc/supervisor.conf.d/
-
+ADD joinCluster.sh /opt/mq/
+ADD startDetached.sh /opt/mq/
 #rabbitmq
 expose 4369 5671 5672 15672 25672
 
 #rabbitmq
-ENV PATH $PATH:/opt/mq/rabbitmq/sbin
+ENV RABBITMQ_HOME /opt/mq/rabbitmq
+ENV PATH $PATH:$RABBITMQ_HOME/sbin
 
