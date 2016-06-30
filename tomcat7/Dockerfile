@@ -20,4 +20,7 @@ ADD bin/catalina.sh /opt/tomcat7/bin/
 
 ADD supervisor_tomcat.conf /etc/supervisor.conf.d/
 
+#tomcat home
+ENV TOMCAT_HOME /opt/tomcat7
+
 expose 8080
