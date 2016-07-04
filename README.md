@@ -11,4 +11,6 @@
 * codis-server : 类似于redis的服务端，比原有的redis增加了slot功能，默认暴露的端口为6379。
 * erlang : 基于erlang_R15B01构建，[下载地址](https://www.erlang.org/downloads)。
 * rabbitmq : 基于3.5.1构建，[下载地址](http://www.rabbitmq.com/releases/rabbitmq-server/) , [rabbitmq概览](http://www.rabbitmq.com/getstarted.html)，[rabbitmq文档](http://www.rabbitmq.com/documentation.html) 。
+* dubbo_admin: dubbo管理端控制台。
+* net : 实现docker容器网络互联的方案。以后结合zookeeper实现自动化的docker容器路由规则动态添加。
 * mysql : 暂未使用
