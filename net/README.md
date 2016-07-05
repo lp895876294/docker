@@ -1,8 +1,6 @@
 ### docker网络管理，打通不同宿主机docker容器网络的方案包括：
 * 基于隧道技术。weave、flannel、[openvswitch](http://lpyyn.iteye.com/blog/2308714)。
-* 路由方案。calico 、liunx路由转发。<br>
-* [方案配置参考](http://blog.liuker.cn/index.php/docker/30.html)
-
+* 路由方案。calico 、liunx路由转发。[配置参考](http://blog.liuker.cn/index.php/docker/30.html)
 * 以上这些方式每种方式都有自己的优缺点。在调研了这几种方案的配置和实现方式之后，还是计划结合现有生产环境中的网络环境使用liunx路由转发的方案。现在生产环境中网络是使用的VPC网络，网络中的服务ip地址同属于一个子网，并且IP地址是连续的。因此，可以为每台服务器指定docker容器地址的规则，然后在所有的服务器中动态添加docker容器的路由规则。<br>    
 
 ### 具体方式如下：
