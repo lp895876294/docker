@@ -3,7 +3,11 @@
 # if app_profile is empty , do nothing 
 if [ -z "$app_profile" ] ; then
 
-    echo "env app_profile can not be empty ."
+	echo "env app_profile can not be empty ."
+
+elif [ "$START_SYNC" != "1" ] ; then
+	
+	echo "sync is not needed ."
 
 else 
     echo "app_profile = $app_profile"
