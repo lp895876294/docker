@@ -1,0 +1,2 @@
+FATAL  | wrapper  | 2016/07/26 16:32:28 | Unable to open configuration file: /docker/gitdata/wrapper_java/wrapper-delta-pack-3.5.14/bin/../conf/wrapper.conf (No such file or directory)
+FATAL  | wrapper  | 2016/07/26 16:32:28 |   Current working directory: /docker/gitdata/wrapper_java/wrapper-delta-pack-3.5.14/bin
