@@ -3,28 +3,44 @@
 # if app_profile is empty , do nothing 
 if [ -z "$app_profile" ] ; then
 
-	echo "env app_profile can not be empty ."
+	echo "env app_profile can not be empty ." >> sync.log 
 
 elif [ "$START_SYNC" != "1" ] ; then
 	
-	echo "sync is not needed ."
+	echo "sync is not needed ."  >> sync.log
 
 else 
-    echo "app_profile = $app_profile"
+    echo "app_profile = $app_profile" >> sync.log
     
-    #get local sync directory
-    if [ -z "$LOCAL_SYNC_DIR" ]; then
-        
-        syncdir="$TOMCAT_HOME/webapps/ROOT/resources"
-    
-    else
 
-        syncdir="$LOCAL_SYNC_DIR"
-   
-    fi
-    
-    if [ -e "$syncdir" ] ; then
-        echo "local sync dir : $syncdir "
+	# unzip ROOT.war to temp folder
+	unzip -o -d $TOMCAT_HOME/temp "$TOMCAT_HOME/webapps/ROOT.war"
+	
+	# set sync root folder
+	syncROOT="$TOMCAT_HOME/temp" 
+
+    for (( j=0 ; j<=20 ; j++ )) ;
+    do
+		#sync directory
+		syncdir="LOCAL_SYNC_DIR"
+
+		# gt 0 , add postfix
+		if [ $j -gt 0 ]; then
+			syncdir="LOCAL_SYNC_DIR_$j" 
+		fi
+		
+		#get value from env
+		eval syncdir=\$$syncdir ;
+
+		#if syncdir is empty or not exist , do nothing
+		if [ -z "$syncdir" ] || [ ! -e "$syncROOT/$syncdir"  ] ; then
+			continue ;
+		fi
+
+		#sync dir
+		syncdir="$syncROOT/$syncdir" ;
+
+        echo "local sync dir $j : $syncdir "  >> sync.log
 
         #begin sync files
         for (( i=0 ; i<=20 ; i++ )) ;
@@ -52,23 +68,20 @@ else
         
             #if host password or host directory is empty , do nothing 
             if [ -z "$hostpwd" ] || [ -z "$hostdir" ] ; then
-		echo "$i is emtpy"
+				echo "host dir $i is emtpy"  >> sync.log
                 continue
             fi
 
-            echo "begin sync to $hostdir with password \"$hostpwd\""
+            echo "begin sync \"$syncdir\" to $hostdir with password \"$hostpwd\""  >> sync.log
         
             #use scp command to copy or override files
             sshpass -p $hostpwd scp -r -o StrictHostKeyChecking=no $syncdir $hostdir  
 
         done
 
-    else
-
-        echo "local dir \"$syncdir\" is not exist"
-    
-    fi
-
+	done
 fi
 
-read -p "press 'enter' to continue ~"
+echo "==================sync complete=================="  >> sync.log
+
+read -p "press 'enter' to continue ~"  

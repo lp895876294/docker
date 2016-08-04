@@ -14,11 +14,14 @@ RUN yum install -y sshpass
 ENV START_SYNC 1
 
 # local sync dir
-ENV LOCAL_SYNC_DIR ${TOMCAT_HOME}/webapps/ROOT/resources
+ENV LOCAL_SYNC_DIR resources
 
 # test environment 
 ENV TEST_HOST_PWD_1 www.zx.c0m
-ENV TEST_HOST_DIR_1 root@10.126.8.77:/data/webresources
+
+#product environment
+ENV PRODUCT_HOST_PWD_1 www.zx.c0m
+ENV PRODUCT_HOST_PWD_2 www.zx.c0m
 
 # add sync script
 ADD sync_resources.sh /opt/
