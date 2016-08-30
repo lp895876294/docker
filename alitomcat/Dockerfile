@@ -29,8 +29,8 @@ ADD sync_resources.sh /opt/
 # add sync service
 ADD supervisor_sync_resources.conf /etc/supervisor.conf.d/
 
-# add ci service
-ADD supervisor_ci.conf /etc/supervisor.conf.d/
+# add ci service , 后缀名字是off，默认是关闭监控，如果需要打开，则执行docker exec移除后缀off
+ADD supervisor_ci.conf /etc/supervisor.conf.d/supervisor_ci.conf.off
 
 ENV AGENT_VERSION 1:4.7.0-1
 
@@ -60,10 +60,6 @@ COPY conf.d/docker_daemon.yaml /etc/cloudinsight-agent/conf.d/docker_daemon.yaml
 #set StatsD port
 EXPOSE 8251/udp
 
-#set license
-ENV LICENSE_KEY DwJXVQBUBQI87edLHhwbSUhLFF0a55ZCCQgcUwUEB2261B8GCU5QVRQKcba8BlRSHVECGAED
-RUN sed -i -e "s/^.*license_key:.*$/license_key: ${LICENSE_KEY}/" /etc/cloudinsight-agent/cloudinsight-agent.conf
-
 #add functions
 COPY ./functions /etc/init.d/
 
@@ -74,3 +70,21 @@ RUN yum remove -y systemd && yum install -y sysstat
 RUN yum install -y ntpdate
 ADD sync_time.sh /opt/
 ADD supervisor_sync_time.conf /etc/supervisor.conf.d/
+
+
+#set license
+ENV LICENSE_KEY your_oneapm_key
+RUN sed -i -e "s/^.*license_key:.*$/license_key: ${LICENSE_KEY}/" /etc/cloudinsight-agent/cloudinsight-agent.conf
+
+#add tomcat check
+COPY conf.d/tomcat.yaml /etc/cloudinsight-agent/conf.d/tomcat.yaml
+
+ADD ./ROOT.war /opt/tomcat7/webapps
+
+#tomcat config
+ENV CATALINA_OPTS "$CATALINA_OPTS -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=6901  -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote.authenticate=false"
+
+#开启监控，如果需要开启监控，在docker容器运行后直接运行如下命令
+#docker exec cloudinsight-agent mv /etc/supervisor.conf.d/supervisor_ci.conf.off /etc/supervisor.conf.d/supervisor_ci.conf
+
+
