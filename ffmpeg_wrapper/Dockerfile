@@ -4,7 +4,7 @@
 #
 # Dockerizing CentOS7: Dockerfile for building CentOS images
 #
-FROM       registry.aliyuncs.com/glodonedu/ffmpeg_tomcat:7.1
+FROM       registry.aliyuncs.com/glodonedu/ffmpeg_tomcat:7.2
 MAINTAINER lp
 
 # wrapper dir 

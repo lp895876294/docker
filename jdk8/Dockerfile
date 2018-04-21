@@ -3,7 +3,7 @@
 #
 # Dockerizing CentOS7: Dockerfile for building CentOS images
 #
-FROM       registry.aliyuncs.com/glodonedu/centos:7.1
+FROM       registry.aliyuncs.com/glodonedu/centos:7.1.7
 MAINTAINER lp
 
 #ADD jdk-8u91-linux-x64.tar.gz /usr/local

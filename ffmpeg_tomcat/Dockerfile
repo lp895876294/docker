@@ -4,7 +4,7 @@
 #
 # Dockerizing CentOS7: Dockerfile for building CentOS images
 #
-FROM       registry.aliyuncs.com/glodonedu/ffmpeg:2.8
+FROM       registry.aliyuncs.com/glodonedu/ffmpeg:2.9.1
 MAINTAINER lp
 
 ENV TZ "Asia/Shanghai"
@@ -39,10 +39,10 @@ ENV CLASSPATH $JAVA_HOME/lib
 ENV PATH $PATH:$JAVA_HOME/bin
 
 # install tomcat
-RUN wget http://mirrors.hust.edu.cn/apache/tomcat/tomcat-7/v7.0.70/bin/apache-tomcat-7.0.70.tar.gz && \
-	tar -xvf apache-tomcat-7.0.70.tar.gz -C /opt/  && \
-	mv /opt/apache-tomcat-7.0.70 /opt/tomcat7 && \
-	rm -rf apache-tomcat-7.0.70.tar.gz && \
+RUN wget http://mirrors.hust.edu.cn/apache/tomcat/tomcat-7/v7.0.73/bin/apache-tomcat-7.0.73.tar.gz && \
+	tar -xvf apache-tomcat-7.0.73.tar.gz -C /opt/  && \
+	mv /opt/apache-tomcat-7.0.73 /opt/tomcat7 && \
+	rm -rf apache-tomcat-7.0.73.tar.gz && \
 	rm -rf /opt/tomcat7/webapps/* 
 
 #add tomcat config
@@ -56,4 +56,6 @@ ADD supervisor_tomcat.conf /etc/supervisor.conf.d/
 ENV TOMCAT_HOME /opt/tomcat7
 
 expose 8080
+
+ENV LANG en_US.UTF-8
 
